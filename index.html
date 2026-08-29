@@ -732,8 +732,10 @@ button{font:inherit}
      screenLinks : optional [{label, url}] shown under that line
      about  : a paragraph on what the book is about
      authorNote : a few lines on who wrote it
-     authorPhoto : optional direct image URL for the author portrait
-     social : optional { goodreads, website, x, instagram, facebook } for the author.
+     authorPhoto : portrait override. A full URL, or a path to a file you have
+                   put in the repo, e.g. "authors/burkeman.jpg" - self-hosting
+                   is the only reliable fix when no open portrait exists.
+     social : optional { website, newsletter, substack, x, instagram, facebook }.
               Only fill in accounts you have actually checked; a wrong handle
               points your site at a stranger under the author's name.
      note   : what YOUR group thought; shown under "From the group"
@@ -878,6 +880,8 @@ const BOOKS = [
     authorNote: "Daniel James Brown began the book after meeting Joe Rantz, by then an old man living near him in Washington state. His other books include The Indifferent Stars Above, on the Donner Party, and Facing the Mountain, on Japanese American soldiers in the Second World War. He taught writing before moving to narrative nonfiction full time.",
     screen:     "Feature film directed by George Clooney, 2023.",
     screenLinks:[{label:"IMDb", url:"https://www.imdb.com/title/tt1856080/"}, {label:"Letterboxd", url:"https://letterboxd.com/film/the-boys-in-the-boat/"}, {label:"Rotten Tomatoes", url:"https://www.rottentomatoes.com/m/the_boys_in_the_boat"}],
+    authorPhoto:"authors/daniel-james-brown.jpg",
+    social:     { website:"https://www.danieljamesbrown.com" },
     note:       "Add a line here about how the discussion went.",
     colour:     "#345c6b"
   },
@@ -899,6 +903,8 @@ const BOOKS = [
     awards:     ["National Book Critics Circle Award for Nonfiction"],
     screen:     "Apple TV+ miniseries, 2022. Eight episodes from John Ridley and Carlton Cuse, with Vera Farmiga and Cherry Jones. Fink produced.",
     screenLinks:[{label:"Apple TV+", url:"https://tv.apple.com/us/show/five-days-at-memorial/umc.cmc.50agn5zbvuj7z70teq1p0pixn"}],
+    authorPhoto:"authors/sheri-fink.jpg",
+    social:     { website:"https://www.sherifink.net" },
     note:       "Add a line here about how the discussion went.",
     colour:     "#5c3a5e"
   },
@@ -915,6 +921,7 @@ const BOOKS = [
     pick:       "",
     about:      "Eve has just been made redundant after thirty years at the same engineering firm. Sally has walked out of her marriage with a rucksack and a carrier bag. They meet on a towpath, along with Anastasia, who lives on a narrowboat and has been told she needs treatment that will keep her ashore. The arrangement is straightforward: Eve and Sally will take the boat up the canals to a yard for repairs, and Anastasia will stay in Eve's flat. What follows is a summer of locks, engine trouble and the particular society of the waterways, told in alternating chapters. Very little in it is dramatic, and the book is better for that.",
     authorNote: "Anne Youngson worked in senior management in the car industry before she began writing. Her first novel, Meet Me at the Museum, was published in 2018 when she was seventy and was shortlisted for the Costa First Novel Award. She lives in Oxfordshire.",
+    authorPhoto:"authors/anne-youngson.jpg",
     note:       "Add a line here about how the discussion went.",
     colour:     "#3f6b4a"
   },
@@ -934,6 +941,7 @@ const BOOKS = [
     awards:     ["McLaughlin-Esstman-Stearns First Novel Prize, 2023", "Audie Award for Audiobook of the Year finalist, 2023"],
     screen:     "Netflix film, 2026. Directed by Olivia Newman, with Sally Field as Tova and Alfred Molina voicing Marcellus.",
     screenLinks:[{label:"IMDb", url:"https://www.imdb.com/title/tt33100314/"}, {label:"Letterboxd", url:"https://letterboxd.com/film/remarkably-bright-creatures/"}],
+    authorPhoto:"authors/shelby-van-pelt.jpg",
     note:       "Add a line here about how the discussion went.",
     colour:     "#a04a3c"
   },
@@ -1006,7 +1014,9 @@ const BOOKS = [
     about:      "If you live to eighty you get roughly four thousand weeks, and Burkeman's argument is that most time-management advice is an elaborate way of avoiding that fact. Getting more efficient does not create room; it invites more demands. Drawing on Heidegger, Seneca, contemporary psychology and his own years writing a productivity column, he lands close to the opposite of productivity culture: accept that you will neglect most of what you could do, choose the neglect deliberately, and stop treating the present as preparation for some future in which you are finally on top of things. Short, funny, and more philosophical than the shelf it usually sits on.",
     authorNote: "Oliver Burkeman is a British writer who spent many years at The Guardian, where his column This Column Will Change Your Life worked through self-help ideas with a good deal of scepticism. His earlier book The Antidote examines happiness by way of negative thinking. He writes a newsletter called The Imperfectionist.",
     awards:     ["One of Time’s 100 Must-Read Books of 2021"],
-    social:     { x:"https://x.com/oliverburkeman", website:"https://www.oliverburkeman.com" },
+    social:     { x:"https://x.com/oliverburkeman", website:"https://www.oliverburkeman.com",
+                  newsletter:"https://www.oliverburkeman.com/the-imperfectionist" },
+    authorPhoto:"authors/oliver-burkeman.jpg",
     note:       "Add a line here about how the discussion went.",
     colour:     "#c2532f"
   },
@@ -1363,7 +1373,8 @@ const BOOKS = [
     social = social || {};
     var out=[{ label:'Goodreads',
                url:'https://www.goodreads.com/search?q='+enc(name)+'&search_type=people' }];
-    [['website','Website'],['x','X'],['instagram','Instagram'],['facebook','Facebook']]
+    [['website','Website'],['newsletter','Newsletter'],['substack','Substack'],
+     ['x','X'],['instagram','Instagram'],['facebook','Facebook']]
       .forEach(function(pair){
         if(social[pair[0]]) out.push({ label:pair[1], url:social[pair[0]] });
       });
