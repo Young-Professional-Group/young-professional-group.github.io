@@ -4,21 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark light">
-<title>Young Professional Group — Reading Log</title>
+<title>Young Professional Group · Reading Log</title>
 <meta name="description" content="What the Young Professional Group book club has read, and what we're reading next.">
 <script>
   (function(){ try { var s=localStorage.getItem('ypg-theme');
     if(s==='dark'||s==='light') document.documentElement.setAttribute('data-theme',s);
   } catch(e){} })();
 </script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 112'%3E%3Crect x='7' y='5' width='74' height='102' rx='2' fill='none' stroke='%239a93b4' stroke-width='5'/%3E%3Cpath d='M84 9V103M89 9V103' stroke='%239a93b4' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M94 9V103' stroke='%23f0b132' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 112'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Crect x='7' y='5' width='74' height='102' rx='3'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23c)'%3E%3Cg transform='rotate(-28 44 56)'%3E%3Crect x='-46' y='-7.01' width='180' height='18.00' fill='%23e0503f'/%3E%3Crect x='-46' y='10.99' width='180' height='18.00' fill='%23ef8c3a'/%3E%3Crect x='-46' y='29.00' width='180' height='18.00' fill='%23f0c040'/%3E%3Crect x='-46' y='47.00' width='180' height='18.00' fill='%235fa86a'/%3E%3Crect x='-46' y='65.00' width='180' height='18.00' fill='%233f7fc4'/%3E%3Crect x='-46' y='83.00' width='180' height='18.00' fill='%235a55a8'/%3E%3Crect x='-46' y='101.01' width='180' height='18.00' fill='%239152a8'/%3E%3C/g%3E%3C/g%3E%3Crect x='7' y='5' width='74' height='102' rx='3' fill='none' stroke='%239a93b4' stroke-width='5'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,300;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
 /* ═══════════════════════════════════════════════════════════
-   YOUNG PROFESSIONAL GROUP — reading log
+   YOUNG PROFESSIONAL GROUP · reading log
    To add a book, scroll to the BOOKS list near the bottom.
    Nothing in this stylesheet needs to change.
    ═══════════════════════════════════════════════════════════ */
@@ -62,12 +62,41 @@ body{
   margin:0;background:var(--bg);color:var(--fg);
   font-family:var(--ui);font-size:16px;line-height:1.6;
   -webkit-font-smoothing:antialiased;
+  padding-top:52px;
   transition:background-color .3s ease,color .3s ease;
 }
 h1,h2,h3{margin:0}
 button{font:inherit}
 
 .wrap{max-width:1180px;margin:0 auto;padding:0 var(--gut)}
+
+/* ---------- section menu ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;gap:clamp(10px,1.8vw,22px);align-items:center;
+  padding:0 clamp(14px,4vw,40px);height:52px;
+  background:color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter:saturate(150%) blur(10px);
+  border-bottom:1px solid var(--rule);
+  overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;
+  transition:box-shadow .3s ease;
+}
+.nav::-webkit-scrollbar{display:none}
+.nav.is-scrolled{box-shadow:0 6px 18px rgba(0,0,0,.22)}
+.nav-mark{
+  background:none;border:0;padding:0 10px 0 0;margin-right:auto;cursor:pointer;
+  font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.08em;
+  color:var(--fg);white-space:nowrap;
+}
+.nav button.nav-link{
+  background:none;border:0;padding:4px 0;cursor:pointer;white-space:nowrap;
+  font-family:var(--ui);font-size:11px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid transparent;transition:color .2s,border-color .2s;
+}
+.nav button.nav-link:hover,.nav button.nav-link:focus-visible{
+  color:var(--fg);border-bottom-color:var(--marigold);
+}
 
 /* ---------- masthead ---------- */
 .top{
@@ -105,6 +134,14 @@ button{font:inherit}
   margin-top:clamp(28px,5vw,44px);
   padding-top:22px;border-top:1px solid var(--rule);
 }
+.stat-link{
+  display:block;background:none;border:0;padding:0 0 3px;margin:0;
+  font:inherit;color:inherit;text-align:inherit;cursor:pointer;
+}
+.stat-link .stat-n,.stat-link .stat-l{display:block}
+.stat-link:hover .stat-n,.stat-link:focus-visible .stat-n{color:var(--marigold)}
+.stat-link:hover .stat-l,.stat-link:focus-visible .stat-l{color:var(--fg)}
+.stat-link .stat-n,.stat-link .stat-l{transition:color .2s ease}
 .stat-n{font-family:var(--display);font-size:clamp(26px,5vw,40px);line-height:1;font-weight:400}
 .stat-l{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:7px}
 
@@ -123,7 +160,7 @@ button{font:inherit}
 .bar{
   display:flex;gap:10px;flex-wrap:wrap;align-items:center;
   padding:20px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
-  position:sticky;top:0;background:var(--bg);z-index:20;
+  position:sticky;top:52px;background:var(--bg);z-index:20;
 }
 .seg{display:inline-flex;border:1px solid var(--rule);border-radius:999px;overflow:hidden}
 .seg button{
@@ -182,12 +219,20 @@ button{font:inherit}
 .logo{display:block;height:60px;width:auto;color:var(--fg);overflow:visible}
 .logo .plate{fill:none;stroke:currentColor;stroke-width:1.15}
 .logo .plate-inner{fill:none;stroke:currentColor;stroke-width:.5;opacity:.42}
+/* the cover: seven bands running on the diagonal. Retint here;
+   the angle itself lives on the rotate() in the markup below. */
+.logo .c1{fill:#e0503f}   /* red     */
+.logo .c2{fill:#ef8c3a}   /* orange  */
+.logo .c3{fill:#f0c040}   /* yellow  */
+.logo .c4{fill:#5fa86a}   /* green   */
+.logo .c5{fill:#3f7fc4}   /* blue    */
+.logo .c6{fill:#5a55a8}   /* indigo  */
+.logo .c7{fill:#9152a8}   /* violet  */
+/* the title band keeps YPG legible across the colours */
+.logo .band{fill:var(--bg)}
 .logo .edge{stroke:currentColor;stroke-width:.85;opacity:.34;stroke-linecap:round}
-.logo .edge-key{stroke:var(--marigold);stroke-width:1.5;stroke-linecap:round}
-.logo .mono{fill:currentColor;font-family:var(--display);font-weight:400;
-            font-size:25px;letter-spacing:2.2px}
-.logo .hair{stroke:currentColor;stroke-width:.75;opacity:.5;stroke-linecap:round}
-.logo .textline{stroke:currentColor;stroke-width:1.4;opacity:.2;stroke-linecap:round}
+.logo .mono{fill:currentColor;font-family:var(--display);font-weight:600;
+            font-size:23px;letter-spacing:2.4px}
 .logo-foot{height:38px;margin:0 auto 6px}
 
 .wordmark{
@@ -211,7 +256,11 @@ button{font:inherit}
 }
 .detail-cover img{width:100%;height:100%;object-fit:cover;display:block}
 .detail-top{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
-.detail h3{font-family:var(--display);font-weight:400;font-size:clamp(22px,4vw,34px);line-height:1.15}
+.detail h3{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(22px,4vw,34px);line-height:1.18;letter-spacing:-.005em;
+}
+.detail-sub{font-weight:600;opacity:.72}
 .detail .by{color:var(--muted);font-size:15px;margin-top:4px}
 .detail-facts{
   display:flex;gap:clamp(16px,4vw,38px);flex-wrap:wrap;
@@ -231,11 +280,14 @@ button{font:inherit}
 
 .links{
   display:flex;gap:8px;flex-wrap:wrap;align-items:center;
-  margin-top:22px;padding-top:18px;border-top:1px solid var(--rule);
+  max-width:64ch;margin:24px auto 0;padding-top:22px;
+  border-top:1px solid var(--rule);
 }
+/* same label treatment as .prose h4 */
 .links-l{
-  font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
-  flex:0 0 100%;margin-bottom:2px;
+  font-family:var(--ui);font-size:10px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);
+  flex:0 0 100%;margin:0 0 11px;
 }
 .link-chip{
   display:inline-block;text-decoration:none;color:var(--muted);
@@ -261,7 +313,7 @@ button{font:inherit}
   display:grid;grid-template-columns:1fr auto;gap:6px 20px;
   padding:20px 0;border-bottom:1px solid var(--rule);align-items:baseline;
 }
-.row-t{font-family:var(--display);font-size:clamp(18px,3vw,23px);font-weight:400;line-height:1.25}
+.row-t{font-family:var(--display);font-size:clamp(18px,3vw,23px);font-weight:600;line-height:1.25}
 .row-a{color:var(--muted);font-size:14.5px}
 .row-m{font-size:12px;color:var(--muted);letter-spacing:.08em;text-align:right;white-space:nowrap}
 .row-n{grid-column:1/-1;color:var(--muted);font-size:14.5px;margin:6px 0 0;max-width:64ch}
@@ -296,9 +348,9 @@ button{font:inherit}
 /* ---------- about the club ---------- */
 .club-grid{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule)}
 @media(min-width:760px){.club-grid{grid-template-columns:1fr 1fr}}
-.club-cell{background:var(--bg);padding:clamp(20px,3.4vw,28px);text-align:left}
+.club-cell{background:var(--bg);padding:clamp(20px,3.4vw,28px);text-align:center}
 .club-cell h3{font-family:var(--display);font-weight:400;font-size:19px;margin:0 0 7px}
-.club-cell p{margin:0;color:var(--muted);font-size:15px;line-height:1.65;max-width:none}
+.club-cell p{margin:0 auto;color:var(--muted);font-size:15px;line-height:1.65;max-width:46ch}
 
 /* ---------- by the numbers ---------- */
 .figs{display:grid;gap:clamp(18px,3vw,30px);grid-template-columns:repeat(2,1fr);margin-bottom:38px}
@@ -312,47 +364,89 @@ button{font:inherit}
 .bar-track{grid-column:1/-1;height:5px;background:var(--rule);border-radius:3px;overflow:hidden}
 .bar-fill{height:100%;background:var(--marigold);border-radius:3px}
 
-/* ---------- add-a-book form ---------- */
-.form{max-width:560px;margin:0 auto;text-align:left}
-.field{margin-bottom:16px}
-.field label{
-  display:block;font-size:10px;font-weight:500;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--muted);margin-bottom:6px;
+/* ---------- publication timeline ---------- */
+.timeline{max-width:620px;margin:0 auto;text-align:left}
+.tl-row{display:grid;grid-template-columns:56px 1fr;gap:0 20px;position:relative;padding-bottom:20px}
+.tl-row:last-child{padding-bottom:0}
+.tl-row::before{
+  content:"";position:absolute;left:66px;top:9px;bottom:0;width:1px;background:var(--rule);
 }
-.field input,.field select,.field textarea{
-  width:100%;background:var(--surface);color:var(--fg);
-  border:1px solid var(--rule);border-radius:3px;
-  font-family:var(--ui);font-size:15px;padding:11px 13px;
+.tl-row:last-child::before{display:none}
+.tl-year{
+  font-family:var(--display);font-size:16px;color:var(--muted);text-align:right;padding-top:1px;
 }
-.field textarea{resize:vertical;min-height:76px;line-height:1.6}
-.field-row{display:grid;gap:16px;grid-template-columns:1fr}
-@media(min-width:560px){.field-row{grid-template-columns:1fr 1fr}}
-.btn{
-  background:var(--marigold);color:var(--bg);border:1px solid var(--marigold);
-  border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.18em;
-  text-transform:uppercase;padding:13px 28px;cursor:pointer;
+.tl-book{position:relative;padding-left:20px}
+.tl-book::before{
+  content:"";position:absolute;left:-4.5px;top:8px;width:9px;height:9px;border-radius:50%;
+  background:var(--marigold);
 }
-.btn:hover{background:transparent;color:var(--marigold)}
-.btn-ghost{
-  background:transparent;color:var(--muted);border:1px solid var(--rule);
-  border-radius:999px;font-size:11px;font-weight:500;letter-spacing:.16em;
-  text-transform:uppercase;padding:13px 22px;cursor:pointer;margin-left:8px;
+.tl-t{font-family:var(--display);font-weight:600;font-size:17px;line-height:1.3}
+.tl-a{font-size:13px;color:var(--muted);margin-top:2px}
+
+/* ---------- authors ---------- */
+.author-card{background:var(--bg);padding:clamp(22px,3.4vw,30px);text-align:center}
+.author-photo{
+  width:84px;height:84px;border-radius:50%;margin:0 auto 16px;
+  overflow:hidden;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(0,0,0,.28);
 }
-.btn-ghost:hover{color:var(--fg);border-color:var(--fg)}
-.form-actions{margin-top:22px}
-.form-msg{margin-top:18px;font-size:14px;color:var(--marigold);min-height:1.2em}
-.snippet{margin-top:24px;display:none}
-.snippet.on{display:block}
-.snippet h4{
-  font-family:var(--ui);font-size:10px;font-weight:500;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--muted);margin:0 0 9px;
+.author-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.author-initials{
+  font-family:var(--display);font-weight:400;font-size:27px;letter-spacing:.02em;
+  color:rgba(255,255,255,.92);
 }
-.snippet pre{
-  background:var(--surface);border:1px solid var(--rule);border-radius:4px;
-  padding:16px;overflow-x:auto;font-size:12.5px;line-height:1.6;margin:0;
-  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--fg);
+.author-card h3{font-family:var(--display);font-weight:600;font-size:19px;margin:0 0 5px}
+.author-works{
+  font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--marigold);
+  margin:0 0 13px;
 }
-.tag-draft{border-color:var(--marigold);color:var(--marigold)}
+.author-card p{
+  margin:0 auto;color:var(--muted);font-size:14.5px;line-height:1.65;max-width:44ch;
+}
+
+/* ---------- awards ---------- */
+.cell-links{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+
+.awards{max-width:600px;margin:0 auto;text-align:center}
+.award-row{padding:20px 0;border-top:1px solid var(--rule)}
+.award-row:first-child{border-top:0}
+.award-t{font-family:var(--display);font-weight:600;font-size:17px;margin-bottom:8px}
+.award-row ul{margin:0;padding:0;list-style:none}
+.award-row li{color:var(--muted);font-size:14.5px;line-height:1.6;margin-bottom:4px}
+
+/* ---------- quotations ---------- */
+.quote-stage{
+  min-height:190px;display:flex;flex-direction:column;justify-content:center;
+  max-width:660px;margin:0 auto;
+}
+.quote-body{transition:opacity .5s ease}
+.quote-body.fading{opacity:0}
+.quote-text{
+  font-family:var(--display);font-weight:300;font-style:italic;
+  margin:0 0 20px;
+}
+/* size follows the length of the line, so a short one still lands like a display quote */
+.quote-text.q-lg{font-size:clamp(20px,3vw,28px);line-height:1.34}
+.quote-text.q-md{font-size:clamp(18px,2.1vw,23px);line-height:1.44}
+.quote-text.q-sm{font-size:clamp(16px,1.7vw,19px);line-height:1.56;font-style:normal}
+.quote-text.q-xs{font-size:clamp(15px,1.4vw,17px);line-height:1.64;font-style:normal}
+.quote-src{font-size:13px;letter-spacing:.06em;color:var(--muted)}
+.quote-src b{font-weight:500;color:var(--fg)}
+.quote-nav{
+  display:flex;gap:14px;align-items:center;justify-content:center;
+  margin-top:28px;
+}
+.q-arrow{
+  background:transparent;border:1px solid var(--rule);color:var(--muted);
+  border-radius:999px;width:34px;height:34px;cursor:pointer;line-height:1;
+}
+.q-arrow:hover{color:var(--fg);border-color:var(--fg)}
+.q-count{font-size:11px;letter-spacing:.18em;color:var(--muted);min-width:64px}
+.quote-empty{max-width:600px;margin:0 auto;color:var(--muted);font-size:15px}
+.quote-links{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:22px}
+
+@media(min-width:560px){}
 
 /* ---------- footer ---------- */
 .foot{
@@ -361,6 +455,9 @@ button{font:inherit}
   display:flex;gap:14px;flex-wrap:wrap;
 }
 .foot .spacer{flex:1 1 auto}
+
+/* clear the sticky control bar when jumping to a section */
+#shelfWrap,#quotes,#about,#numbers,.sec{scroll-margin-top:124px}
 
 :focus-visible{outline:2px solid var(--marigold);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){
@@ -377,7 +474,7 @@ button{font:inherit}
    Delete this whole block to go back to left-aligned.
    ═══════════════════════════════════════════════════════════ */
 
-/* masthead — label centred, theme button pinned right */
+/* masthead: label centred, theme button pinned right */
 .top{flex-direction:column;align-items:center;gap:9px;justify-content:center;position:relative;text-align:center}
 .foot{flex-direction:column;align-items:center;gap:4px}
 .theme-btn{position:absolute;right:0;top:22px;margin-left:0}
@@ -388,7 +485,7 @@ button{font:inherit}
 .hero p{margin-left:auto;margin-right:auto}
 .stats{justify-content:center}
 
-/* next up — keep the accent rule, move it to the top edge */
+/* next up: keep the accent rule, move it to the top edge */
 .next{
   justify-items:center;text-align:center;
   border-left:1px solid var(--rule);border-top:3px solid var(--marigold);
@@ -426,26 +523,44 @@ button{font:inherit}
 .sec{text-align:center}
 .sec-intro{margin-left:auto;margin-right:auto}
 .figs{text-align:center}
-.form{text-align:left}
-.form-actions{text-align:center}
-.form-msg{text-align:center}
 </style>
 </head>
 <body>
 
-<div class="wrap">
+<nav class="nav" id="nav" aria-label="Sections">
+  <button class="nav-mark" type="button" data-scroll="#top">YPG</button>
+  <button class="nav-link" type="button" data-scroll="#shelfWrap">Shelf</button>
+  <button class="nav-link" type="button" data-scroll="#quotes">Quotes</button>
+  <button class="nav-link" type="button" data-scroll="#about">About</button>
+  <button class="nav-link" type="button" data-scroll="#numbers">Numbers</button>
+  <button class="nav-link" type="button" data-scroll="#timeline">Timeline</button>
+  <button class="nav-link" type="button" data-scroll="#authors">Authors</button>
+  <button class="nav-link" type="button" data-scroll="#screen">On screen</button>
+  <button class="nav-link" type="button" data-scroll="#awards">Awards</button>
+</nav>
+
+<div class="wrap" id="top">
 
   <div class="top">
     <svg class="logo" viewBox="0 0 100 112" role="img" aria-label="Young Professional Group">
+        <defs><clipPath id="ypgCoverA"><rect x="7" y="5" width="74" height="102" rx="1.5"/></clipPath></defs>
+        <g clip-path="url(#ypgCoverA)">
+          <g transform="rotate(-28 44 56)">
+          <rect class="c1" x="-46" y="-7.01" width="180" height="18.00"/>
+          <rect class="c2" x="-46" y="10.99" width="180" height="18.00"/>
+          <rect class="c3" x="-46" y="29.00" width="180" height="18.00"/>
+          <rect class="c4" x="-46" y="47.00" width="180" height="18.00"/>
+          <rect class="c5" x="-46" y="65.00" width="180" height="18.00"/>
+          <rect class="c6" x="-46" y="83.00" width="180" height="18.00"/>
+          <rect class="c7" x="-46" y="101.01" width="180" height="18.00"/>
+          </g>
+          <rect class="band" x="7" y="45" width="74" height="25"/>
+        </g>
+        <text class="mono" x="44" y="64" text-anchor="middle">YPG</text>
         <rect class="plate" x="7" y="5" width="74" height="102" rx="1.5"/>
-        <rect class="plate-inner" x="12.5" y="10.5" width="63" height="91" rx="1"/>
-        <text class="mono" x="44" y="59" text-anchor="middle">YPG</text>
-        <path class="hair" d="M24 70H64"/>
-        <path class="textline" d="M31 79H57"/>
-        <path class="textline" d="M35 86H53"/>
         <path class="edge" d="M84 9V103"/>
         <path class="edge" d="M87.5 9V103"/>
-        <path class="edge-key" d="M91 9V103"/>
+        <path class="edge" d="M91 9V103"/>
       </svg>
     <p class="wordmark">Young Professional Group</p>
     <p class="club">Reading log</p>
@@ -454,11 +569,11 @@ button{font:inherit}
 
   <header class="hero">
     <h1>What we've <em>read</em>, in order.</h1>
-    <p id="heroBlurb">A book club for people with day jobs. Every book we've finished lives on the shelf below — thicker books are longer books.</p>
+    <p id="heroBlurb">A book club for people with day jobs. Every book we've finished lives on the shelf below. Thicker books are longer books.</p>
     <div class="stats">
-      <div><div class="stat-n" id="statBooks">—</div><div class="stat-l">Books read</div></div>
-      <div><div class="stat-n" id="statPages">—</div><div class="stat-l">Pages between us</div></div>
-      <div><div class="stat-n" id="statSplit">—</div><div class="stat-l">Fiction / non-fiction</div></div>
+      <button class="stat-link" type="button" data-scroll="#shelfWrap"><span class="stat-n" id="statBooks">–</span><span class="stat-l">Books read</span></button>
+      <button class="stat-link" type="button" data-scroll="#numbers"><span class="stat-n" id="statPages">–</span><span class="stat-l">Pages between us</span></button>
+      <button class="stat-link" type="button" data-scroll="#numbers"><span class="stat-n" id="statSplit">–</span><span class="stat-l">Fiction / non-fiction</span></button>
     </div>
   </header>
 
@@ -489,22 +604,31 @@ button{font:inherit}
   </div>
 
   <section class="shelf-wrap" id="shelfWrap">
-    <p class="shelf-note">Tap a cover for the details — genre, synopsis, and who wrote it. The striped edge on each book is its page count.</p>
+    <p class="shelf-note">Tap a cover for the details: genre, synopsis, and who wrote it. The striped edge on each book is its page count.</p>
     <div class="shelf" id="shelf"></div>
     <div class="detail" id="detail" hidden></div>
   </section>
 
   <section class="list" id="list"></section>
 
+  <!-- QUOTATIONS -->
+  <section class="sec" id="quotes">
+    <p class="sec-label">In their own words</p>
+    <h2>Lines worth keeping</h2>
+    <p class="sec-intro">A new one every thirty seconds.</p>
+    <div id="quoteStage"></div>
+
+  </section>
+
   <!-- ABOUT THE CLUB -->
   <section class="sec" id="about">
     <p class="sec-label">About</p>
     <h2>How the group works</h2>
-    <p class="sec-intro">Replace anything below that isn't right — these are placeholders.</p>
+    <p class="sec-intro">Replace anything below that isn't right. These are placeholders.</p>
     <div class="club-grid">
       <div class="club-cell">
         <h3>When we meet</h3>
-        <p>Add the cadence and the usual place here — monthly, second Thursday, wherever you gather.</p>
+        <p>Add the cadence and the usual place here: monthly, second Thursday, wherever you gather.</p>
       </div>
       <div class="club-cell">
         <h3>How books get chosen</h3>
@@ -529,87 +653,56 @@ button{font:inherit}
     <div class="bars" id="genreBars"></div>
   </section>
 
-  <!-- ADD A BOOK -->
-  <section class="sec" id="add">
-    <p class="sec-label">Add a book</p>
-    <h2>Put one on the shelf</h2>
-    <p class="sec-intro">
-      This adds the book to the shelf on this device straight away, and writes out the code
-      to paste into the file so everyone else sees it too.
-    </p>
-    <div class="form">
-      <div class="field">
-        <label for="f-title">Title</label>
-        <input id="f-title" type="text" placeholder="Required">
-      </div>
-      <div class="field">
-        <label for="f-author">Author</label>
-        <input id="f-author" type="text" placeholder="Required">
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label for="f-genre">Genre</label>
-          <input id="f-genre" type="text" list="genreList" placeholder="e.g. Historical fiction">
-          <datalist id="genreList"></datalist>
-        </div>
-        <div class="field">
-          <label for="f-type">Fiction or non-fiction</label>
-          <select id="f-type">
-            <option value="Fiction">Fiction</option>
-            <option value="Non-fiction">Non-fiction</option>
-          </select>
-        </div>
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label for="f-published">Year published</label>
-          <input id="f-published" type="number" placeholder="e.g. 2021">
-        </div>
-        <div class="field">
-          <label for="f-pages">Pages</label>
-          <input id="f-pages" type="number" placeholder="Sets the spine thickness">
-        </div>
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label for="f-isbn">ISBN</label>
-          <input id="f-isbn" type="text" placeholder="13 digits — loads the cover">
-        </div>
-        <div class="field">
-          <label for="f-read">Month read</label>
-          <input id="f-read" type="month">
-        </div>
-      </div>
-      <div class="field">
-        <label for="f-note">What the group thought</label>
-        <textarea id="f-note" placeholder="One or two lines"></textarea>
-      </div>
-      <div class="form-actions">
-        <button class="btn" type="button" id="addBtn">Add to shelf</button>
-        <button class="btn-ghost" type="button" id="clearBtn">Clear my additions</button>
-      </div>
-      <p class="form-msg" id="formMsg"></p>
-      <div class="snippet" id="snippet">
-        <h4>Paste this into the BOOKS list to make it permanent</h4>
-        <pre id="snippetCode"></pre>
-        <div class="form-actions">
-          <button class="btn-ghost" type="button" id="copyBtn" style="margin-left:0">Copy</button>
-        </div>
-      </div>
-    </div>
+  <!-- TIMELINE -->
+  <section class="sec" id="timeline">
+    <p class="sec-label">Timeline</p>
+    <h2>When they were written</h2>
+    <p class="sec-intro">The twelve by date of publication, oldest first.</p>
+    <div class="timeline" id="timelineList"></div>
+  </section>
+
+  <!-- AUTHORS -->
+  <section class="sec" id="authors">
+    <p class="sec-label">Authors</p>
+    <h2>Who wrote them</h2>
+    <div class="club-grid" id="authorGrid"></div>
+  </section>
+
+  <!-- ON SCREEN -->
+  <section class="sec" id="screen">
+    <p class="sec-label">On screen</p>
+    <h2>Adapted for film and television</h2>
+    <p class="sec-intro">Worth knowing before someone spoils a book by watching it first.</p>
+    <div class="club-grid" id="screenGrid"></div>
+  </section>
+
+  <!-- AWARDS -->
+  <section class="sec" id="awards">
+    <p class="sec-label">Recognition</p>
+    <h2>Prizes and honours</h2>
+    <div class="awards" id="awardsList"></div>
   </section>
 
   <footer class="foot">
     <svg class="logo logo-foot" viewBox="0 0 100 112" role="img" aria-label="Young Professional Group">
+        <defs><clipPath id="ypgCoverB"><rect x="7" y="5" width="74" height="102" rx="1.5"/></clipPath></defs>
+        <g clip-path="url(#ypgCoverB)">
+          <g transform="rotate(-28 44 56)">
+          <rect class="c1" x="-46" y="-7.01" width="180" height="18.00"/>
+          <rect class="c2" x="-46" y="10.99" width="180" height="18.00"/>
+          <rect class="c3" x="-46" y="29.00" width="180" height="18.00"/>
+          <rect class="c4" x="-46" y="47.00" width="180" height="18.00"/>
+          <rect class="c5" x="-46" y="65.00" width="180" height="18.00"/>
+          <rect class="c6" x="-46" y="83.00" width="180" height="18.00"/>
+          <rect class="c7" x="-46" y="101.01" width="180" height="18.00"/>
+          </g>
+          <rect class="band" x="7" y="45" width="74" height="25"/>
+        </g>
+        <text class="mono" x="44" y="64" text-anchor="middle">YPG</text>
         <rect class="plate" x="7" y="5" width="74" height="102" rx="1.5"/>
-        <rect class="plate-inner" x="12.5" y="10.5" width="63" height="91" rx="1"/>
-        <text class="mono" x="44" y="59" text-anchor="middle">YPG</text>
-        <path class="hair" d="M24 70H64"/>
-        <path class="textline" d="M31 79H57"/>
-        <path class="textline" d="M35 86H53"/>
         <path class="edge" d="M84 9V103"/>
         <path class="edge" d="M87.5 9V103"/>
-        <path class="edge-key" d="M91 9V103"/>
+        <path class="edge" d="M91 9V103"/>
       </svg>
     <p class="wordmark wordmark-sm">Young Professional Group</p>
     <span class="spacer"></span>
@@ -619,24 +712,28 @@ button{font:inherit}
 
 <script>
 /* ═══════════════════════════════════════════════════════════════
-   ▼▼▼  EDIT BELOW THIS LINE — everything else can stay as it is ▼▼▼
+   ▼▼▼  EDIT BELOW THIS LINE. Everything else can stay as it is ▼▼▼
 
    Add a book by copying one block and changing the values.
-     read   — when the GROUP read it, "YYYY-MM"
-     readTo — only if it spanned months; the month you finished
-     pages  — sets how thick the spine is on the shelf
-     isbn   — optional, but makes the Goodreads and Bookshop links land exactly
-     links  — optional. Paste a canonical page to replace a search link, e.g.
+     read   : when the GROUP read it, "YYYY-MM"
+     readTo : only if it spanned months; the month you finished
+     pages  : sets how thick the spine is on the shelf
+     isbn   : optional, but makes the Goodreads and Bookshop links land exactly
+     links  : optional. Paste a canonical page to replace a search link, e.g.
               links: { goodreads:"https://...", fable:"https://..." }
-     genre  — the specific genre, e.g. "Historical fiction"
-     type   — "Fiction" or "Non-fiction"; drives the split in the stats
-     about  — a paragraph on what the book is about
-     authorNote — a few lines on who wrote it
-     note   — what YOUR group thought; shown under "From the group"
-     cover  — optional. A direct image URL, if you'd rather not use the
+     genre  : the specific genre, e.g. "Historical fiction"
+     type   : "Fiction" or "Non-fiction"; drives the split in the stats
+     awards : optional list of prizes, e.g. ["Pulitzer Prize for Fiction, 2015"]
+     screen : optional line about a film or series adaptation
+     screenLinks : optional [{label, url}] shown under that line
+     about  : a paragraph on what the book is about
+     authorNote : a few lines on who wrote it
+     authorPhoto : optional direct image URL for the author portrait
+     note   : what YOUR group thought; shown under "From the group"
+     cover  : optional. A direct image URL, if you'd rather not use the
               cover Open Library finds automatically
-     colour — the spine shown while the cover loads, or if none is found
-     sample — DELETE this line (and the book) once you send me real ones
+     colour : the spine shown while the cover loads, or if none is found
+     sample : DELETE this line (and the book) once you send me real ones
    ═══════════════════════════════════════════════════════════════ */
 
 const CLUB = {
@@ -648,7 +745,7 @@ const CLUB = {
 };
 
 /* Where each book links out to. Delete a line to drop that site everywhere,
-   or reorder them — the chips follow this order. */
+   or reorder them; the chips follow this order. */
 const SITES = [
   { key:"goodreads",  name:"Goodreads",     url:(q,i)=> "https://www.goodreads.com/search?q="+enc(i||q) },
   { key:"storygraph", name:"StoryGraph",    url:(q,i)=> "https://app.thestorygraph.com/browse?search_term="+enc(i||q) },
@@ -663,8 +760,27 @@ function enc(s){ return encodeURIComponent(String(s)); }
    NEEDS YOU:  every book below has  read:""  because the slide deck
    didn't record when the group read each one. Fill in "YYYY-MM" and
    the year filter and date sorting start working. Page counts marked
-   "approx." are common editions — correct any that are off.
+   "approx." are common editions; correct any that are off.
    ─────────────────────────────────────────────────────────────── */
+
+/* ───────────────────────────────────────────────────────────────
+   QUOTATIONS : add lines your group actually marked while reading.
+   Keep each one short: a sentence or two. These are other people's
+   words on a public page, so brief and attributed is the way to do it.
+
+     { text:"...", book:"Four Thousand Weeks", page:63 }
+
+   The "page" is optional. "book" should match a title in BOOKS so the
+   author is filled in automatically.
+   ─────────────────────────────────────────────────────────────── */
+
+const QUOTES = [
+
+  { text:"Productivity is a trap. Becoming more efficient just makes you more rushed, and trying to clear the decks simply makes them fill up again faster. Nobody in the history of humanity has ever achieved “work-life balance,” whatever that might be, and you certainly won’t get there by copying the “six things successful people do before 7:00 a.m.” The day will never arrive when you finally have everything under control—when the flood of emails has been contained; when your to-do lists have stopped getting longer; when you’re meeting all your obligations at work and in your home life; when nobody’s angry with you for missing a deadline or dropping the ball; and when the fully optimized person you’ve become can turn, at long last, to the things life is really supposed to be about. Let’s start by admitting defeat: none of this is ever going to happen. But you know what? That’s excellent news.”, book:"Four Thousand Weeks" },
+
+  // { text:"Put a line here.", book:"Four Thousand Weeks", page:63 },
+
+];
 
 const BOOKS = [
 
@@ -680,7 +796,7 @@ const BOOKS = [
     isbn:       "9780812973013",
     pick:       "",
     about:      "Kidder spent years following Paul Farmer, a doctor and anthropologist who built a clinic on Haiti's central plateau and then argued, against a good deal of received wisdom, that the world's poorest patients deserved the same standard of care as anyone else. The book moves between a squatter settlement in Cange, the wards of Brigham and Women's in Boston, drug-resistant tuberculosis in Peru, and prison TB in Russia. It is partly a portrait of an exhausting, charismatic, largely impossible man, and partly an argument about what medicine owes people who cannot pay for it. Kidder is present in the narrative and often sceptical, and the friction between his doubts and Farmer's certainty is much of what makes it work. The title is a Haitian proverb: beyond mountains, more mountains.",
-    authorNote: "Tracy Kidder (1945–2026) won both the Pulitzer Prize and the National Book Award for The Soul of a New Machine. He served as an army intelligence officer in Vietnam, studied at Harvard and the Iowa Writers' Workshop, and spent five decades finding literary subjects in unglamorous places — a school year, a house being built, a nursing home. He died in Boston in March 2026.",
+    authorNote: "Tracy Kidder (1945–2026) won both the Pulitzer Prize and the National Book Award for The Soul of a New Machine. He served as an army intelligence officer in Vietnam, studied at Harvard and the Iowa Writers' Workshop, and spent five decades finding literary subjects in unglamorous places: a school year, a house being built, a nursing home. He died in Boston in March 2026.",
     note:       "Add a line here about how the discussion went.",
     colour:     "#4a6b5a"
   },
@@ -695,8 +811,9 @@ const BOOKS = [
     type:       "Fiction",
     isbn:       "9780525559474",
     pick:       "",
-    about:      "Nora Seed's life has narrowed to a list of regrets: a band she left, a swimming career she abandoned, a wedding she called off, a cat she failed to keep alive. At her lowest point she arrives at a library that sits between life and death, where every volume holds a life she might have lived had she chosen differently. She tries them on one at a time — glaciologist, rock star, wife, Olympian — and finds each has its own weather. The premise is a thought experiment and Haig runs it with a light touch, but the real subject is the gap between a life that looks good from outside and one that feels worth staying in.",
+    about:      "Nora Seed's life has narrowed to a list of regrets: a band she left, a swimming career she abandoned, a wedding she called off, a cat she failed to keep alive. At her lowest point she arrives at a library that sits between life and death, where every volume holds a life she might have lived had she chosen differently. She tries them on one at a time: glaciologist, rock star, wife, Olympian, and finds each has its own weather. The premise is a thought experiment and Haig runs it with a light touch, but the real subject is the gap between a life that looks good from outside and one that feels worth staying in.",
     authorNote: "Matt Haig is an English novelist and memoirist. He has written directly about his own depression in Reasons to Stay Alive and Notes on a Nervous Planet, and fiction including How to Stop Time and The Comfort Book. The Midnight Library became a worldwide bestseller and won the Goodreads Choice Award for Fiction.",
+    awards:     ["Goodreads Choice Award for Fiction, 2020"],
     note:       "Add a line here about how the discussion went.",
     colour:     "#2f4b7c"
   },
@@ -712,8 +829,9 @@ const BOOKS = [
     type:       "Non-fiction",
     isbn:       "9780307408860",
     pick:       "",
-    about:      "On 1 May 1915 the Lusitania left New York for Liverpool carrying a record number of infants and a passenger list in no particular state of alarm, despite Germany having declared the waters around Britain a war zone. Larson cuts between the liner and Unterseeboot-20, whose captain kept a meticulous war diary, and adds a third thread: Room 40, the secret British unit that was reading German naval codes and did not pass on what it knew. Woodrow Wilson hovers at the edges, distracted by grief and a new courtship. Everyone knows how it ends, which is rather the point — the dread is built out of small decisions, weather and fog.",
+    about:      "On 1 May 1915 the Lusitania left New York for Liverpool carrying a record number of infants and a passenger list in no particular state of alarm, despite Germany having declared the waters around Britain a war zone. Larson cuts between the liner and Unterseeboot-20, whose captain kept a meticulous war diary, and adds a third thread: Room 40, the secret British unit that was reading German naval codes and did not pass on what it knew. Woodrow Wilson hovers at the edges, distracted by grief and a new courtship. Everyone knows how it ends, which is rather the point. The dread is built out of small decisions, weather and fog.",
     authorNote: "Erik Larson writes narrative nonfiction assembled from archives, diaries and letters. His books include The Devil in the White City, In the Garden of Beasts, Isaac's Storm and The Splendid and the Vile. He worked as a journalist at The Wall Street Journal and Time before turning to books full time.",
+    awards:     ["Finalist, Washington State Book Award"],
     note:       "Add a line here about how the discussion went.",
     colour:     "#7a3b2e"
   },
@@ -729,7 +847,10 @@ const BOOKS = [
     isbn:       "9781476746586",
     pick:       "",
     about:      "Marie-Laure LeBlanc is blind and lives in Paris, where her father is locksmith at the Museum of Natural History; when the Germans arrive the two of them flee to Saint-Malo carrying something the museum would rather not lose. Werner Pfennig is an orphan in a German mining town with a gift for radios, which lifts him out of the mines into a Nazi military academy and then into a unit hunting resistance transmitters. The novel alternates between them in very short chapters, moving back and forth across the years, until the bombardment of Saint-Malo in August 1944 brings the two lines together. Doerr spent ten years writing it; it won the Pulitzer Prize for Fiction in 2015.",
-    authorNote: "Anthony Doerr grew up in Cleveland and lives in Boise, Idaho. Before this novel he was known mainly for short fiction — The Shell Collector, Memory Wall — and the memoir Four Seasons in Rome. His later novel Cloud Cuckoo Land was a National Book Award finalist. He is drawn to science, and to describing the physical world very closely.",
+    authorNote: "Anthony Doerr grew up in Cleveland and lives in Boise, Idaho. Before this novel he was known mainly for short fiction (The Shell Collector, Memory Wall) and the memoir Four Seasons in Rome. His later novel Cloud Cuckoo Land was a National Book Award finalist. He is drawn to science, and to describing the physical world very closely.",
+    awards:     ["Pulitzer Prize for Fiction, 2015", "Andrew Carnegie Medal for Excellence in Fiction"],
+    screen:     "Netflix limited series, 2023. Four episodes, directed by Shawn Levy and written by Steven Knight, with Aria Mia Loberti, Mark Ruffalo and Hugh Laurie.",
+    screenLinks:[{label:"IMDb", url:"https://www.imdb.com/title/tt15320362/"}],
     note:       "Add a line here about how the discussion went.",
     colour:     "#8a7231"
   },
@@ -747,6 +868,8 @@ const BOOKS = [
     pick:       "",
     about:      "Nine young men out of logging camps, shipyards and farms rowed for the University of Washington in the 1930s and, improbably, went to Berlin in 1936 and beat Germany and Italy in front of Hitler. Brown builds the story around Joe Rantz, abandoned by his family as a teenager and rowing partly to prove he belonged somewhere. Around him are Al Ulbrickson, the unreadable coach, and George Pocock, the English boatbuilder who shaped racing shells out of cedar and talked about rowing as something close to faith. It is also a book about the Depression, the dust of eastern Washington, and the propaganda machinery built around the 1936 Games.",
     authorNote: "Daniel James Brown began the book after meeting Joe Rantz, by then an old man living near him in Washington state. His other books include The Indifferent Stars Above, on the Donner Party, and Facing the Mountain, on Japanese American soldiers in the Second World War. He taught writing before moving to narrative nonfiction full time.",
+    screen:     "Feature film directed by George Clooney, 2023.",
+    screenLinks:[{label:"IMDb", url:"https://www.imdb.com/title/tt1856080/"}, {label:"Letterboxd", url:"https://letterboxd.com/film/the-boys-in-the-boat/"}, {label:"Rotten Tomatoes", url:"https://www.rottentomatoes.com/m/the_boys_in_the_boat"}],
     note:       "Add a line here about how the discussion went.",
     colour:     "#345c6b"
   },
@@ -765,6 +888,9 @@ const BOOKS = [
     pick:       "",
     about:      "When the levees failed after Hurricane Katrina, Memorial Medical Center in New Orleans lost power, then air conditioning, then any clear chain of command. Over five days staff carried patients up dark stairwells, ventilated by hand, and made decisions about who would be evacuated last. Afterwards a doctor and two nurses were arrested and accused of hastening patients' deaths. Fink, who is both a physician and a reporter, spent six years reconstructing the five days hour by hour, then follows the investigation, the grand jury, and the arguments about triage the case forced into the open. The second half is as much about law and institutions as about the hospital.",
     authorNote: "Sheri Fink holds an MD and a PhD from Stanford and reports for The New York Times. Her article on Memorial, published with ProPublica, won the 2010 Pulitzer Prize for investigative reporting; she shared a second Pulitzer in 2015 for coverage of the Ebola epidemic. Her first book, War Hospital, is about medical staff under siege in Srebrenica.",
+    awards:     ["National Book Critics Circle Award for Nonfiction"],
+    screen:     "Apple TV+ miniseries, 2022. Eight episodes from John Ridley and Carlton Cuse, with Vera Farmiga and Cherry Jones. Fink produced.",
+    screenLinks:[{label:"Apple TV+", url:"https://tv.apple.com/us/show/five-days-at-memorial/umc.cmc.50agn5zbvuj7z70teq1p0pixn"}],
     note:       "Add a line here about how the discussion went.",
     colour:     "#5c3a5e"
   },
@@ -797,6 +923,9 @@ const BOOKS = [
     pick:       "",
     about:      "Tova Sullivan cleans the Sowell Bay Aquarium at night. Her son Erik vanished from a boat in Puget Sound thirty years ago and she has kept working because stopping is worse. Marcellus is a giant Pacific octopus in tank six, near the end of his life, contemptuous of his captors and considerably smarter than any of them realise; several chapters are narrated by him. He works out what happened to Erik long before anyone else does, and then has to find a way to tell a human, with the limited time and limited means available to an octopus. A third thread follows Cameron, a drifting thirty-year-old from California with a reason to come north.",
     authorNote: "Shelby Van Pelt grew up in the Pacific Northwest and now lives near Chicago. Remarkably Bright Creatures is her first novel; it began as a short piece written from an octopus's point of view for a writing workshop. It won the McLaughlin-Esstman-Stearns First Novel Prize.",
+    awards:     ["McLaughlin-Esstman-Stearns First Novel Prize, 2023", "Audie Award for Audiobook of the Year finalist, 2023"],
+    screen:     "Netflix film, 2026. Directed by Olivia Newman, with Sally Field as Tova and Alfred Molina voicing Marcellus.",
+    screenLinks:[{label:"IMDb", url:"https://www.imdb.com/title/tt33100314/"}, {label:"Letterboxd", url:"https://letterboxd.com/film/remarkably-bright-creatures/"}],
     note:       "Add a line here about how the discussion went.",
     colour:     "#a04a3c"
   },
@@ -812,7 +941,7 @@ const BOOKS = [
     type:       "Non-fiction",
     isbn:       "9780805095159",
     pick:       "",
-    about:      "Gawande's argument is that medicine has become very good at postponing death and rather bad at everything else that matters near the end of a life. He moves between his own patients, the history of the nursing home, the invention of assisted living, and the decline of his father, also a surgeon. He is interested in what happens when doctors present a menu of interventions instead of asking what a person actually wants their remaining time to look like — and in the practitioners, hospice nurses among them, who ask that question well. The book did a great deal to move these conversations into ordinary use.",
+    about:      "Gawande's argument is that medicine has become very good at postponing death and rather bad at everything else that matters near the end of a life. He moves between his own patients, the history of the nursing home, the invention of assisted living, and the decline of his father, also a surgeon. He is interested in what happens when doctors present a menu of interventions instead of asking what a person actually wants their remaining time to look like, and in the practitioners, hospice nurses among them, who ask that question well. The book did a great deal to move these conversations into ordinary use.",
     authorNote: "Atul Gawande is a surgeon and a writer. He practised at Brigham and Women's Hospital in Boston, taught at Harvard, and has been a staff writer at The New Yorker since 1998. His other books are Complications, Better and The Checklist Manifesto. He received a MacArthur Fellowship in 2006.",
     note:       "Add a line here about how the discussion went.",
     colour:     "#3d5a6c"
@@ -829,7 +958,7 @@ const BOOKS = [
     type:       "Non-fiction",
     isbn:       "9780399592553",
     pick:       "",
-    about:      "Brown's premise is that most of us work with a very small vocabulary for what we feel — in her research, around three emotions — and that this makes it hard to be understood or to understand anyone else. The book maps eighty-seven emotions and experiences, grouped by the situations that produce them, and spends most of its length on distinctions: stress against overwhelm, guilt against shame, envy against jealousy, and the differences between empathy, sympathy, pity and compassion. It is built to be dipped into rather than read straight through, and it is heavily illustrated. Of her books it is the most like a reference work.",
+    about:      "Brown's premise is that most of us work with a very small vocabulary for what we feel (in her research, around three emotions), and that this makes it hard to be understood or to understand anyone else. The book maps eighty-seven emotions and experiences, grouped by the situations that produce them, and spends most of its length on distinctions: stress against overwhelm, guilt against shame, envy against jealousy, and the differences between empathy, sympathy, pity and compassion. It is built to be dipped into rather than read straight through, and it is heavily illustrated. Of her books it is the most like a reference work.",
     authorNote: "Brené Brown is a research professor at the University of Houston Graduate College of Social Work, where she has spent two decades studying shame, vulnerability and courage. Her 2010 TEDx talk on vulnerability is among the most watched ever recorded. Her other books include Daring Greatly, Rising Strong and Dare to Lead.",
     note:       "Add a line here about how the discussion went.",
     colour:     "#8a4a2f"
@@ -845,8 +974,8 @@ const BOOKS = [
     type:       "Fiction",
     isbn:       "9780593101537",
     pick:       "",
-    about:      "Belle da Costa Greene was hired in her twenties to build J. P. Morgan's library, and became one of the most formidable figures in the international trade in rare books and manuscripts — outbidding European dealers, negotiating hard, and doing it publicly as a young woman in a room of older men. She was also Black, the daughter of Richard Greener, the first Black graduate of Harvard, and she lived her professional life passing as white behind an invented Portuguese ancestry. The novel follows the career and the cost of the secret in parallel, through to her years running what became the Morgan Library. The authors' note at the end is worth reading.",
-    authorNote: "Marie Benedict is the pen name of Heather Terrell, a former lawyer who writes historical fiction about women left out of the record — The Only Woman in the Room, The Other Einstein. Victoria Christopher Murray has published more than twenty novels. The two have written together again since.",
+    about:      "Belle da Costa Greene was hired in her twenties to build J. P. Morgan's library, and became one of the most formidable figures in the international trade in rare books and manuscripts: outbidding European dealers, negotiating hard, and doing it publicly as a young woman in a room of older men. She was also Black, the daughter of Richard Greener, the first Black graduate of Harvard, and she lived her professional life passing as white behind an invented Portuguese ancestry. The novel follows the career and the cost of the secret in parallel, through to her years running what became the Morgan Library. The authors' note at the end is worth reading.",
+    authorNote: "Marie Benedict is the pen name of Heather Terrell, a former lawyer who writes historical fiction about women left out of the record: The Only Woman in the Room, The Other Einstein. Victoria Christopher Murray has published more than twenty novels. The two have written together again since.",
     note:       "Add a line here about how the discussion went.",
     colour:     "#6b5230"
   },
@@ -866,6 +995,7 @@ const BOOKS = [
     pick:       "",
     about:      "If you live to eighty you get roughly four thousand weeks, and Burkeman's argument is that most time-management advice is an elaborate way of avoiding that fact. Getting more efficient does not create room; it invites more demands. Drawing on Heidegger, Seneca, contemporary psychology and his own years writing a productivity column, he lands close to the opposite of productivity culture: accept that you will neglect most of what you could do, choose the neglect deliberately, and stop treating the present as preparation for some future in which you are finally on top of things. Short, funny, and more philosophical than the shelf it usually sits on.",
     authorNote: "Oliver Burkeman is a British writer who spent many years at The Guardian, where his column This Column Will Change Your Life worked through self-help ideas with a good deal of scepticism. His earlier book The Antidote examines happiness by way of negative thinking. He writes a newsletter called The Imperfectionist.",
+    awards:     ["One of Time’s 100 Must-Read Books of 2021"],
     note:       "Add a line here about how the discussion went.",
     colour:     "#c2532f"
   },
@@ -877,6 +1007,7 @@ const BOOKS = [
 
 /* ---------- rendering ---------- */
 (function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var root=document.documentElement, palette=["#c2532f","#3f6f8c","#6b7f4a","#7a4a6b","#b08132","#4a6b7a","#8c3f52"];
   var shelf=document.getElementById('shelf'), detail=document.getElementById('detail'),
       list=document.getElementById('list'), shelfWrap=document.getElementById('shelfWrap');
@@ -970,15 +1101,15 @@ const BOOKS = [
       '<div class="detail-cover" style="background:'+colourFor(b,i)+'">'+
         '<span class="book-fallback">'+esc(b.title)+'</span></div>'+
       '<div class="detail-top"><div>'+
-        '<h3>'+esc(b.title)+(b.subtitle?'<span style="opacity:.6"> — '+esc(b.subtitle)+'</span>':'')+
+        '<h3>'+esc(b.title)+(b.subtitle?'<span class="detail-sub">: '+esc(b.subtitle)+'</span>':'')+
         (b.draft?'<span class="tag tag-draft">added here</span>':'')+'</h3>'+
         '<p class="by">'+esc(b.author||'')+(b.published?' · '+b.published:'')+'</p>'+
       '</div><button class="close" type="button" aria-label="Close">×</button></div>'+
       '<div class="detail-facts">'+
         fact('Read',readLabel(b))+
-        fact('Pages',b.pages||'—')+
-        fact('Genre',b.genre||'—')+
-        fact('Type',b.type||'—')+
+        fact('Pages',b.pages||'–')+
+        fact('Genre',b.genre||'–')+
+        fact('Type',b.type||'–')+
         (b.pick?fact('Chosen by',b.pick):'')+
       '</div>'+
       prose('About the book', b.about)+
@@ -1037,7 +1168,7 @@ const BOOKS = [
             '<span class="book-fallback">'+esc(b.title)+'</span>'+
           '</div>'+
           '<div class="book-edge" style="width:'+e+'px;height:'+(h-5)+'px"></div>';
-        btn.title=b.title+' — '+(b.author||'');
+        btn.title=b.title+', '+(b.author||'');
         loadCover(b, btn.querySelector('.book-cover'));
         btn.onclick=function(){
           if(open===btn){ closeDetail(); return; }
@@ -1054,7 +1185,7 @@ const BOOKS = [
         '<div><div class="row-t">'+esc(b.title)+
           (b.draft?'<span class="tag tag-draft">added here</span>':'')+'</div>'+
           '<div class="row-a">'+esc(b.author||'')+(b.published?' · '+b.published:'')+'</div></div>'+
-        '<div class="row-m">'+readLabel(b)+' · '+(b.pages||'—')+' pp</div>'+
+        '<div class="row-m">'+readLabel(b)+' · '+(b.pages||'–')+' pp</div>'+
         (b.genre?'<div class="row-g"><span class="genre-pill">'+esc(b.genre)+'</span></div>':'')+
         (b.note?'<p class="row-n">'+esc(b.note)+'</p>':'')+
         chips(b,false)+
@@ -1134,14 +1265,228 @@ const BOOKS = [
   sysDark.addEventListener('change',label);
   label();
 
+  /* ---- timeline, authors, adaptations, awards ---- */
+  function timeline(){
+    var el=document.getElementById('timelineList');
+    if(!el) return;
+    var byYear=BOOKS.slice().sort(function(a,b){
+      return (a.published||0)-(b.published||0) || a.title.localeCompare(b.title);
+    });
+    el.innerHTML=byYear.map(function(b){
+      return '<div class="tl-row">'+
+               '<div class="tl-year">'+(b.published||'')+'</div>'+
+               '<div class="tl-book">'+
+                 '<div class="tl-t">'+esc(b.title)+'</div>'+
+                 '<div class="tl-a">'+esc(b.author||'')+'</div>'+
+               '</div>'+
+             '</div>';
+    }).join('');
+  }
+
+  function initials(name){
+    if(/\sand\s/.test(name)){                       // two authors: one letter each
+      return name.split(/\sand\s/).map(function(n){ return n.trim().charAt(0); })
+                 .join('').toUpperCase();
+    }
+    var w=name.split(/\s+/).filter(Boolean);        // otherwise first and last name
+    return (w[0].charAt(0)+(w.length>1 ? w[w.length-1].charAt(0) : '')).toUpperCase();
+  }
+  /* Open Library carries author portraits, but coverage is patchy and they are
+     contributor-uploaded. Anything that misses keeps the initials. */
+  function loadPortrait(name, given, host){
+    if(!host) return;
+    function place(src, onFail){
+      var img=new Image();
+      img.alt=""; img.referrerPolicy="no-referrer";
+      img.onload=function(){
+        if(img.naturalWidth<=2){ if(onFail) onFail(); return; }
+        var f=host.querySelector('.author-initials');
+        if(f) f.parentNode.removeChild(f);
+        host.appendChild(img);
+      };
+      img.onerror=function(){ if(onFail) onFail(); };
+      img.src=src;
+    }
+    if(given){ place(given); return; }
+    fetch('https://openlibrary.org/search/authors.json?limit=1&q='+enc(name))
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        var k = d && d.docs && d.docs[0] && d.docs[0].key;
+        if(k) place('https://covers.openlibrary.org/a/olid/'+k+'-M.jpg');
+      }).catch(function(){});
+  }
+
+  function authors(){
+    var el=document.getElementById('authorGrid');
+    if(!el) return;
+    var seen={}, order=[];
+    BOOKS.forEach(function(b){
+      var name=b.author||'Unknown';
+      if(!seen[name]){ seen[name]={ note:b.authorNote||'', titles:[],
+                                    photo:b.authorPhoto||'', colour:b.colour }; order.push(name); }
+      seen[name].titles.push(b.title);
+      if(!seen[name].note && b.authorNote) seen[name].note=b.authorNote;
+    });
+    order.sort(function(a,b){
+      var la=a.split(' ').pop(), lb=b.split(' ').pop();
+      return la.localeCompare(lb);
+    });
+    el.innerHTML=order.map(function(name,i){
+      var a=seen[name];
+      return '<div class="author-card">'+
+               '<div class="author-photo" data-author="'+esc(name)+'" '+
+                    'style="background:'+(a.colour||palette[i%palette.length])+'">'+
+                 '<span class="author-initials">'+esc(initials(name))+'</span>'+
+               '</div>'+
+               '<h3>'+esc(name)+'</h3>'+
+               '<p class="author-works">'+a.titles.map(esc).join(' \u00B7 ')+'</p>'+
+               (a.note?'<p>'+esc(a.note)+'</p>':'')+
+             '</div>';
+    }).join('');
+    order.forEach(function(name){
+      loadPortrait(name, seen[name].photo,
+        el.querySelector('.author-photo[data-author="'+name.replace(/"/g,'')+'"]'));
+    });
+  }
+
+  function screenAdaptations(){
+    var el=document.getElementById('screenGrid'), sec=document.getElementById('screen');
+    if(!el) return;
+    var withScreen=BOOKS.filter(function(b){ return b.screen; });
+    if(!withScreen.length){ if(sec) sec.style.display='none'; return; }
+    el.innerHTML=withScreen.map(function(b){
+      var links=(b.screenLinks||[]).map(function(l){
+        return '<a class="link-chip" target="_blank" rel="noopener noreferrer" href="'+
+               l.url+'">'+esc(l.label)+'</a>';
+      }).join('');
+      return '<div class="club-cell">'+
+               '<h3>'+esc(b.title)+'</h3>'+
+               '<p>'+esc(b.screen)+'</p>'+
+               (links?'<div class="cell-links">'+links+'</div>':'')+
+             '</div>';
+    }).join('');
+  }
+
+  function awards(){
+    var el=document.getElementById('awardsList'), sec=document.getElementById('awards');
+    if(!el) return;
+    var withAwards=BOOKS.filter(function(b){ return b.awards && b.awards.length; });
+    if(!withAwards.length){ if(sec) sec.style.display='none'; return; }
+    el.innerHTML=withAwards.map(function(b){
+      return '<div class="award-row">'+
+               '<div class="award-t">'+esc(b.title)+'</div>'+
+               '<ul>'+b.awards.map(function(a){ return '<li>'+esc(a)+'</li>'; }).join('')+'</ul>'+
+             '</div>';
+    }).join('');
+  }
+
+  /* ---- in-page links: scroll directly, since a sandboxed frame can
+     swallow ordinary fragment navigation ---- */
+  function initNav(){
+    var nav=document.getElementById('nav');
+    if(!nav) return;
+    function sync(){
+      nav.classList.toggle('is-scrolled', window.scrollY > 8);
+    }
+    sync();
+    window.addEventListener('scroll', sync, { passive:true });
+  }
+
+  function initAnchors(){
+    document.querySelectorAll('[data-scroll],a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var id=a.getAttribute('data-scroll') || a.getAttribute('href');
+        if(id.length<2) return;
+        var target=document.querySelector(id);
+        if(!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block:'start' });
+        try{ history.replaceState(null,'',id); }catch(err){}
+      });
+    });
+  }
+
+  /* ---- quotations: rotates every 30 seconds ---- */
+  var QUOTE_MS=30000, qIdx=0, qTimer=null;
+  function quoteAuthor(title){
+    var b=BOOKS.filter(function(x){ return x.title===title; })[0];
+    return b ? (b.author||'') : '';
+  }
+  function quoteSize(t){
+    var n=String(t).length;
+    if(n<=80)  return 'q-lg';   // a line that can carry display size
+    if(n<=180) return 'q-md';
+    if(n<=340) return 'q-sm';
+    return 'q-xs';              // a full paragraph
+  }
+  function paintQuote(){
+    var q=QUOTES[qIdx], body=document.getElementById('quoteBody');
+    if(!body||!q) return;
+    var who=quoteAuthor(q.book);
+    body.innerHTML =
+      '<p class="quote-text '+quoteSize(q.text)+'">\u201C'+esc(q.text)+'\u201D</p>'+
+      '<p class="quote-src">'+(who?esc(who)+', ':'')+'<b>'+esc(q.book||'')+'</b>'+
+        (q.page?' \u00B7 p.'+esc(String(q.page)):'')+'</p>';
+    var c=document.getElementById('qCount');
+    if(c) c.textContent=(qIdx+1)+' / '+QUOTES.length;
+  }
+  function stepQuote(dir){
+    var body=document.getElementById('quoteBody');
+    if(!body) return;
+    qIdx=(qIdx+dir+QUOTES.length)%QUOTES.length;
+    if(reduce){ paintQuote(); return; }
+    body.classList.add('fading');
+    setTimeout(function(){ paintQuote(); body.classList.remove('fading'); }, 480);
+  }
+  function restartQuoteTimer(){
+    clearInterval(qTimer);
+    if(QUOTES.length>1) qTimer=setInterval(function(){ stepQuote(1); }, QUOTE_MS);
+  }
+  function quotes(){
+    var stage=document.getElementById('quoteStage');
+    if(!stage) return;
+    if(!QUOTES.length){
+      stage.innerHTML =
+        '<div class="quote-empty">'+
+          '<p>No quotations yet. Add them to the QUOTES list near the top of this '+
+          'file and they will start rotating here.</p>'+
+          '<p>Each book\u2019s quotation page on Goodreads is a good place to find '+
+          'the lines people remember:</p>'+
+          '<div class="quote-links">'+
+            BOOKS.map(function(b){
+              return '<a class="link-chip" target="_blank" rel="noopener noreferrer" href="'+
+                     'https://www.goodreads.com/quotes/search?q='+enc(b.title)+'">'+
+                     esc(b.title)+'</a>';
+            }).join('')+
+          '</div>'+
+        '</div>';
+      return;
+    }
+    stage.innerHTML =
+      '<div class="quote-stage"><div class="quote-body" id="quoteBody"></div></div>'+
+      (QUOTES.length>1 ?
+        '<div class="quote-nav">'+
+          '<button class="q-arrow" type="button" id="qPrev" aria-label="Previous quotation">\u2039</button>'+
+          '<span class="q-count" id="qCount"></span>'+
+          '<button class="q-arrow" type="button" id="qNext" aria-label="Next quotation">\u203A</button>'+
+        '</div>' : '');
+    paintQuote();
+    if(QUOTES.length>1){
+      document.getElementById('qPrev').onclick=function(){ stepQuote(-1); restartQuoteTimer(); };
+      document.getElementById('qNext').onclick=function(){ stepQuote(1);  restartQuoteTimer(); };
+      var st=stage.querySelector('.quote-stage');
+      st.addEventListener('mouseenter',function(){ clearInterval(qTimer); });
+      st.addEventListener('mouseleave',restartQuoteTimer);
+      restartQuoteTimer();
+    }
+  }
+
   /* ---- genre dropdown + the datalist the form suggests from ---- */
   function genres(){
     var gs=Array.from(new Set(BOOKS.map(function(b){ return b.genre; }).filter(Boolean))).sort();
     document.getElementById('filterGenre').innerHTML =
       '<option value="all">All genres</option>'+
       gs.map(function(g){ return '<option value="'+esc(g)+'">'+esc(g)+'</option>'; }).join('');
-    document.getElementById('genreList').innerHTML =
-      gs.map(function(g){ return '<option value="'+esc(g)+'"></option>'; }).join('');
   }
 
   /* ---- by the numbers ---- */
@@ -1154,7 +1499,7 @@ const BOOKS = [
       [BOOKS.length, 'Books read'],
       [pages.reduce(function(a,c){return a+c;},0).toLocaleString(), 'Pages between us'],
       [avg, 'Average length'],
-      [yrs.length? (Math.min.apply(null,yrs)+'–'+Math.max.apply(null,yrs)) : '—', 'Published across']
+      [yrs.length? (Math.min.apply(null,yrs)+'–'+Math.max.apply(null,yrs)) : '–', 'Published across']
     ];
     document.getElementById('figs').innerHTML = figs.map(function(f){
       return '<div><div class="fig-n">'+f[0]+'</div><div class="fig-l">'+f[1]+'</div></div>';
@@ -1174,86 +1519,9 @@ const BOOKS = [
     }).join('');
   }
 
-  /* ---- add a book ---- */
-  var STORE='ypg-added';
-  function loadAdded(){
-    try{
-      var raw=localStorage.getItem(STORE);
-      if(!raw) return;
-      JSON.parse(raw).forEach(function(b){ b.draft=true; BOOKS.push(b); });
-    }catch(e){}
-  }
-  function saveAdded(){
-    try{
-      localStorage.setItem(STORE, JSON.stringify(
-        BOOKS.filter(function(b){ return b.draft; }).map(function(b){
-          var c={}; Object.keys(b).forEach(function(k){ if(k!=='draft') c[k]=b[k]; }); return c;
-        })));
-    }catch(e){}
-  }
-  function snippetFor(b){
-    var L=['  {'];
-    L.push('    title:      "'+b.title.replace(/"/g,'\\"')+'",');
-    L.push('    author:     "'+b.author.replace(/"/g,'\\"')+'",');
-    if(b.published) L.push('    published:  '+b.published+',');
-    if(b.pages)     L.push('    pages:      '+b.pages+',');
-    L.push('    read:       "'+(b.read||'')+'",');
-    L.push('    genre:      "'+(b.genre||'')+'",');
-    L.push('    type:       "'+(b.type||'')+'",');
-    if(b.isbn)      L.push('    isbn:       "'+b.isbn+'",');
-    L.push('    pick:       "",');
-    L.push('    about:      "",');
-    L.push('    authorNote: "",');
-    L.push('    note:       "'+(b.note||'').replace(/"/g,'\\"')+'",');
-    L.push('    colour:     "'+(b.colour||'#4a6b5a')+'"');
-    L.push('  },');
-    return L.join('\n');
-  }
-  function initForm(){
-    var v=function(id){ return document.getElementById(id).value.trim(); };
-    var msg=document.getElementById('formMsg');
-    document.getElementById('addBtn').onclick=function(){
-      var title=v('f-title'), author=v('f-author');
-      if(!title || !author){ msg.textContent='Title and author are both needed.'; return; }
-      var palette2=["#4a6b5a","#2f4b7c","#7a3b2e","#8a7231","#345c6b","#5c3a5e","#a04a3c","#6b5230"];
-      var b={
-        title:title, author:author,
-        published: parseInt(v('f-published'),10)||undefined,
-        pages: parseInt(v('f-pages'),10)||undefined,
-        read: v('f-read'),
-        genre: v('f-genre'),
-        type: document.getElementById('f-type').value,
-        isbn: v('f-isbn').replace(/[^0-9Xx]/g,''),
-        note: v('f-note'),
-        colour: palette2[BOOKS.length % palette2.length],
-        draft:true
-      };
-      BOOKS.push(b); saveAdded();
-      years(); genres(); stats(); numbers(); render();
-      document.getElementById('snippetCode').textContent=snippetFor(b);
-      document.getElementById('snippet').classList.add('on');
-      msg.textContent='"'+title+'" is on the shelf on this device. Paste the code below into the file to make it permanent.';
-      ['f-title','f-author','f-genre','f-published','f-pages','f-isbn','f-read','f-note']
-        .forEach(function(id){ document.getElementById(id).value=''; });
-      document.getElementById('shelf').scrollIntoView({behavior:'smooth',block:'start'});
-    };
-    document.getElementById('clearBtn').onclick=function(){
-      for(var i=BOOKS.length-1;i>=0;i--) if(BOOKS[i].draft) BOOKS.splice(i,1);
-      try{ localStorage.removeItem(STORE); }catch(e){}
-      document.getElementById('snippet').classList.remove('on');
-      msg.textContent='Your additions have been removed from this device.';
-      years(); genres(); stats(); numbers(); render();
-    };
-    document.getElementById('copyBtn').onclick=function(){
-      var t=document.getElementById('snippetCode').textContent;
-      if(navigator.clipboard) navigator.clipboard.writeText(t).then(function(){
-        msg.textContent='Copied.';
-      });
-    };
-  }
-
-  loadAdded();
-  years(); genres(); stats(); numbers(); initForm(); render();
+  years(); genres(); stats(); numbers(); quotes();
+  timeline(); authors(); screenAdaptations(); awards();
+  initAnchors(); initNav(); render();
 })();
 </script>
 </body>
