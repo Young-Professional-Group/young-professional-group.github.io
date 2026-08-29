@@ -776,7 +776,7 @@ function enc(s){ return encodeURIComponent(String(s)); }
 
 const QUOTES = [
 
-  { text:"Productivity is a trap. Becoming more efficient just makes you more rushed, and trying to clear the decks simply makes them fill up again faster. Nobody in the history of humanity has ever achieved “work-life balance,” whatever that might be, and you certainly won’t get there by copying the “six things successful people do before 7:00 a.m.” The day will never arrive when you finally have everything under control—when the flood of emails has been contained; when your to-do lists have stopped getting longer; when you’re meeting all your obligations at work and in your home life; when nobody’s angry with you for missing a deadline or dropping the ball; and when the fully optimized person you’ve become can turn, at long last, to the things life is really supposed to be about. Let’s start by admitting defeat: none of this is ever going to happen. But you know what? That’s excellent news.”, book:"Four Thousand Weeks" },
+  { text:"Productivity is a trap.", book:"Four Thousand Weeks" },
 
   // { text:"Put a line here.", book:"Four Thousand Weeks", page:63 },
 
@@ -1212,20 +1212,25 @@ const BOOKS = [
       ys.map(function(y){ return '<option value="'+y+'">Read in '+y+'</option>'; }).join('');
   }
 
-  /* next up */
-  document.getElementById('nextTitle').textContent = CLUB.next.title;
-  document.getElementById('nextMeta').textContent  =
-    CLUB.next.author + ' · ' + CLUB.next.meeting;
+  function nextUp(){
+    document.getElementById('nextTitle').textContent = CLUB.next.title;
+    document.getElementById('nextMeta').textContent  =
+      CLUB.next.author + ' · ' + CLUB.next.meeting;
+  }
 
-  /* view toggle */
+  function viewToggle(){
   var vS=document.getElementById('viewShelf'), vL=document.getElementById('viewList');
   vS.onclick=function(){ vS.setAttribute('aria-pressed','true'); vL.setAttribute('aria-pressed','false');
     shelfWrap.classList.remove('off'); list.classList.remove('on'); };
   vL.onclick=function(){ vL.setAttribute('aria-pressed','true'); vS.setAttribute('aria-pressed','false');
     shelfWrap.classList.add('off'); list.classList.add('on'); };
 
+  }
+
+  function filterEvents(){
   document.getElementById('filterYear').onchange=render;
   document.getElementById('filterGenre').onchange=render;
+  }
   document.getElementById('sortBy').onchange=render;
 
   /* one-line hero blurb: scale it to the column, but never below MIN_PX */
@@ -1519,9 +1524,27 @@ const BOOKS = [
     }).join('');
   }
 
-  years(); genres(); stats(); numbers(); quotes();
-  timeline(); authors(); screenAdaptations(); awards();
-  initAnchors(); initNav(); render();
+  /* Each piece boots inside its own guard. If one throws, everything else
+     still builds and the console names exactly which piece failed. */
+  function safe(name, fn){
+    try { fn(); }
+    catch(err){ console.error('[YPG] "'+name+'" failed and was skipped:', err); }
+  }
+  safe('reading next',   nextUp);
+  safe('view toggle',    viewToggle);
+  safe('filter events',  filterEvents);
+  safe('year filter',    years);
+  safe('genre filter',   genres);
+  safe('hero stats',     stats);
+  safe('by the numbers', numbers);
+  safe('quotations',     quotes);
+  safe('timeline',       timeline);
+  safe('authors',        authors);
+  safe('adaptations',    screenAdaptations);
+  safe('awards',         awards);
+  safe('menu links',     initAnchors);
+  safe('sticky menu',    initNav);
+  safe('shelf',          render);
 })();
 </script>
 </body>
