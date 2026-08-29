@@ -409,6 +409,8 @@ button{font:inherit}
 
 /* ---------- awards ---------- */
 .cell-links{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.author-links{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.author-links .link-chip{font-size:11px;padding:6px 12px}
 
 .awards{max-width:600px;margin:0 auto;text-align:center}
 .award-row{padding:20px 0;border-top:1px solid var(--rule)}
@@ -731,6 +733,9 @@ button{font:inherit}
      about  : a paragraph on what the book is about
      authorNote : a few lines on who wrote it
      authorPhoto : optional direct image URL for the author portrait
+     social : optional { goodreads, website, x, instagram, facebook } for the author.
+              Only fill in accounts you have actually checked; a wrong handle
+              points your site at a stranger under the author's name.
      note   : what YOUR group thought; shown under "From the group"
      cover  : optional. A direct image URL, if you'd rather not use the
               cover Open Library finds automatically
@@ -816,6 +821,7 @@ const BOOKS = [
     about:      "Nora Seed's life has narrowed to a list of regrets: a band she left, a swimming career she abandoned, a wedding she called off, a cat she failed to keep alive. At her lowest point she arrives at a library that sits between life and death, where every volume holds a life she might have lived had she chosen differently. She tries them on one at a time: glaciologist, rock star, wife, Olympian, and finds each has its own weather. The premise is a thought experiment and Haig runs it with a light touch, but the real subject is the gap between a life that looks good from outside and one that feels worth staying in.",
     authorNote: "Matt Haig is an English novelist and memoirist. He has written directly about his own depression in Reasons to Stay Alive and Notes on a Nervous Planet, and fiction including How to Stop Time and The Comfort Book. The Midnight Library became a worldwide bestseller and won the Goodreads Choice Award for Fiction.",
     awards:     ["Goodreads Choice Award for Fiction, 2020"],
+    social:     { website:"https://matthaig.com" },
     note:       "Add a line here about how the discussion went.",
     colour:     "#2f4b7c"
   },
@@ -945,6 +951,7 @@ const BOOKS = [
     pick:       "",
     about:      "Gawande's argument is that medicine has become very good at postponing death and rather bad at everything else that matters near the end of a life. He moves between his own patients, the history of the nursing home, the invention of assisted living, and the decline of his father, also a surgeon. He is interested in what happens when doctors present a menu of interventions instead of asking what a person actually wants their remaining time to look like, and in the practitioners, hospice nurses among them, who ask that question well. The book did a great deal to move these conversations into ordinary use.",
     authorNote: "Atul Gawande is a surgeon and a writer. He practised at Brigham and Women's Hospital in Boston, taught at Harvard, and has been a staff writer at The New Yorker since 1998. His other books are Complications, Better and The Checklist Manifesto. He received a MacArthur Fellowship in 2006.",
+    social:     { website:"https://atulgawande.com" },
     note:       "Add a line here about how the discussion went.",
     colour:     "#3d5a6c"
   },
@@ -962,6 +969,7 @@ const BOOKS = [
     pick:       "",
     about:      "Brown's premise is that most of us work with a very small vocabulary for what we feel (in her research, around three emotions), and that this makes it hard to be understood or to understand anyone else. The book maps eighty-seven emotions and experiences, grouped by the situations that produce them, and spends most of its length on distinctions: stress against overwhelm, guilt against shame, envy against jealousy, and the differences between empathy, sympathy, pity and compassion. It is built to be dipped into rather than read straight through, and it is heavily illustrated. Of her books it is the most like a reference work.",
     authorNote: "Brené Brown is a research professor at the University of Houston Graduate College of Social Work, where she has spent two decades studying shame, vulnerability and courage. Her 2010 TEDx talk on vulnerability is among the most watched ever recorded. Her other books include Daring Greatly, Rising Strong and Dare to Lead.",
+    social:     { instagram:"https://www.instagram.com/brenebrown/", x:"https://x.com/brenebrown", website:"https://brenebrown.com" },
     note:       "Add a line here about how the discussion went.",
     colour:     "#8a4a2f"
   },
@@ -998,6 +1006,7 @@ const BOOKS = [
     about:      "If you live to eighty you get roughly four thousand weeks, and Burkeman's argument is that most time-management advice is an elaborate way of avoiding that fact. Getting more efficient does not create room; it invites more demands. Drawing on Heidegger, Seneca, contemporary psychology and his own years writing a productivity column, he lands close to the opposite of productivity culture: accept that you will neglect most of what you could do, choose the neglect deliberately, and stop treating the present as preparation for some future in which you are finally on top of things. Short, funny, and more philosophical than the shelf it usually sits on.",
     authorNote: "Oliver Burkeman is a British writer who spent many years at The Guardian, where his column This Column Will Change Your Life worked through self-help ideas with a good deal of scepticism. His earlier book The Antidote examines happiness by way of negative thinking. He writes a newsletter called The Imperfectionist.",
     awards:     ["One of Time’s 100 Must-Read Books of 2021"],
+    social:     { x:"https://x.com/oliverburkeman", website:"https://www.oliverburkeman.com" },
     note:       "Add a line here about how the discussion went.",
     colour:     "#c2532f"
   },
@@ -1304,6 +1313,11 @@ const BOOKS = [
        3. Wikipedia's page image, via the search API so the name resolves
           to the right person even when it needs disambiguating
      Anything that misses leaves the initials in place. */
+  /* Two authors joined by "and" match nothing in either API, so look up the
+     first one. Everything else is searched as written. */
+  function searchName(name){
+    return String(name).split(/\s+and\s+/)[0].trim();
+  }
   function loadPortrait(name, given, host){
     if(!host) return;
     function place(src, onFail){
@@ -1321,7 +1335,7 @@ const BOOKS = [
     function fromWikipedia(){
       var u='https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*'+
             '&prop=pageimages&piprop=thumbnail&pithumbsize=320'+
-            '&generator=search&gsrlimit=1&gsrsearch='+enc(name+' author');
+            '&generator=search&gsrlimit=1&gsrsearch='+enc(searchName(name));
       fetch(u).then(function(r){ return r.json(); }).then(function(d){
         var pages = d && d.query && d.query.pages;
         if(!pages) return;
@@ -1331,7 +1345,7 @@ const BOOKS = [
       }).catch(function(){});
     }
     function fromOpenLibrary(){
-      fetch('https://openlibrary.org/search/authors.json?limit=1&q='+enc(name))
+      fetch('https://openlibrary.org/search/authors.json?limit=1&q='+enc(searchName(name)))
         .then(function(r){ return r.json(); })
         .then(function(d){
           var k = d && d.docs && d.docs[0] && d.docs[0].key;
@@ -1343,6 +1357,22 @@ const BOOKS = [
     fromOpenLibrary();
   }
 
+  /* Goodreads resolves reliably from a name search. The rest only appear
+     when a checked URL has been put in the book's social block. */
+  function authorLinks(name, social){
+    social = social || {};
+    var out=[{ label:'Goodreads',
+               url:'https://www.goodreads.com/search?q='+enc(name)+'&search_type=people' }];
+    [['website','Website'],['x','X'],['instagram','Instagram'],['facebook','Facebook']]
+      .forEach(function(pair){
+        if(social[pair[0]]) out.push({ label:pair[1], url:social[pair[0]] });
+      });
+    return '<div class="author-links">'+out.map(function(l){
+      return '<a class="link-chip" target="_blank" rel="noopener noreferrer" href="'+
+             l.url+'">'+esc(l.label)+'</a>';
+    }).join('')+'</div>';
+  }
+
   function authors(){
     var el=document.getElementById('authorGrid');
     if(!el) return;
@@ -1350,7 +1380,9 @@ const BOOKS = [
     BOOKS.forEach(function(b){
       var name=b.author||'Unknown';
       if(!seen[name]){ seen[name]={ note:b.authorNote||'', titles:[],
-                                    photo:b.authorPhoto||'', colour:b.colour }; order.push(name); }
+                                    photo:b.authorPhoto||'', colour:b.colour,
+                                    social:b.social||{} }; order.push(name); }
+      if(b.social) seen[name].social=b.social;
       seen[name].titles.push(b.title);
       if(!seen[name].note && b.authorNote) seen[name].note=b.authorNote;
     });
@@ -1368,6 +1400,7 @@ const BOOKS = [
                '<h3>'+esc(name)+'</h3>'+
                '<p class="author-works">'+a.titles.map(esc).join(' \u00B7 ')+'</p>'+
                (a.note?'<p>'+esc(a.note)+'</p>':'')+
+               authorLinks(name, a.social)+
              '</div>';
     }).join('');
     order.forEach(function(name){
