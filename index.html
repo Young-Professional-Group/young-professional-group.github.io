@@ -119,10 +119,15 @@ button{font:inherit}
 .hero{padding:clamp(40px,8vw,90px) 0 clamp(28px,5vw,48px)}
 .hero h1{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(36px,7.4vw,76px);line-height:1.06;letter-spacing:-.022em;
-  max-width:19ch;
-  text-wrap:balance;          /* spreads the words evenly instead of orphaning one */
+  font-size:clamp(31px,6.2vw,70px);line-height:1.08;letter-spacing:-.022em;
+  max-width:none;
+  text-wrap:balance;   /* if it does wrap, spread the words rather than orphan one */
   hyphens:none;
+}
+/* 30 characters of Newsreader need about 14.4em of width. Above 900px the
+   viewport-tied size keeps that inside the column, so it holds one line. */
+@media(min-width:900px){
+  .hero h1{white-space:nowrap}
 }
 .hero h1 em{font-style:italic;color:var(--marigold)}
 .hero p{
@@ -786,7 +791,7 @@ function enc(s){ return encodeURIComponent(String(s)); }
 const QUOTES = [
 
   { text:"Productivity is a trap. Becoming more efficient just makes you more rushed, and trying to clear the decks simply makes them fill up again faster. Nobody in the history of humanity has ever achieved “work-life balance,” whatever that might be, and you certainly won’t get there by copying the “six things successful people do before 7:00 a.m.” The day will never arrive when you finally have everything under control—when the flood of emails has been contained; when your to-do lists have stopped getting longer; when you’re meeting all your obligations at work and in your home life; when nobody’s angry with you for missing a deadline or dropping the ball; and when the fully optimized person you’ve become can turn, at long last, to the things life is really supposed to be about. Let’s start by admitting defeat: none of this is ever going to happen. But you know what? That’s excellent news.", book:"Four Thousand Weeks" },
-
+  { text:"It’s alarming to face the prospect that you might never truly feel as though you know what you’re doing, in work, marriage, parenting, or anything else. But it’s liberating, too, because it removes a central reason for feeling self-conscious or inhibited about your performance in those domains in the present moment: if the feeling of total authority is never going to arrive, you might as well not wait any longer to give such activities your all—to put bold plans into practice, to stop erring on the side of caution. It is even more liberating to reflect that everyone else is in the same boat, whether they’re aware of it or not.", book:"Four Thousand Weeks" },
   // { text:"Put a line here.", book:"Four Thousand Weeks", page:63 },
 
 ];
