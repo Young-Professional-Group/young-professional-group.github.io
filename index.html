@@ -144,7 +144,8 @@ button{font:inherit}
 .shelf-wrap{padding:clamp(36px,6vw,64px) 0 0}
 .shelf-note{font-size:12.5px;color:var(--muted);margin:0 0 20px;max-width:52ch}
 .shelf{
-  display:flex;align-items:flex-end;gap:5px;flex-wrap:wrap;
+  display:flex;align-items:flex-end;gap:5px 5px;flex-wrap:wrap;
+  row-gap:34px;
   padding:32px clamp(14px,3vw,26px) 0;
   background:linear-gradient(to bottom,transparent 0%,var(--shelf) 82%);
   border-bottom:4px solid var(--shelf-edge);
@@ -196,10 +197,6 @@ button{font:inherit}
 }
 .wordmark-sm{font-size:10.5px;letter-spacing:.24em;color:var(--muted)}
 
-.slot{
-  width:104px;height:158px;border:1px dashed var(--rule);border-bottom:0;
-  border-radius:2px 2px 0 0;opacity:.42;
-}
 
 /* ---------- detail panel ---------- */
 .detail{
@@ -222,7 +219,6 @@ button{font:inherit}
 }
 .f-l{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .f-v{font-family:var(--display);font-size:19px;margin-top:3px}
-.detail-note{margin:20px 0 0;color:var(--muted);font-size:15px;max-width:60ch}
 .prose{
   max-width:64ch;margin:24px auto 0;padding-top:22px;
   border-top:1px solid var(--rule);text-align:left;
@@ -232,8 +228,6 @@ button{font:inherit}
   text-transform:uppercase;color:var(--muted);margin:0 0 11px;
 }
 .prose p{margin:0;font-size:15.5px;line-height:1.74;max-width:none}
-.prose-dim p{color:var(--muted);font-size:14.5px;line-height:1.7}
-.band-night .prose{border-top-color:var(--panel-rule)}
 
 .links{
   display:flex;gap:8px;flex-wrap:wrap;align-items:center;
@@ -276,7 +270,6 @@ button{font:inherit}
   border:1px solid var(--rule);border-radius:999px;padding:2px 9px;color:var(--muted);
   margin-left:8px;vertical-align:middle;
 }
-.tag-sample{border-color:var(--marigold);color:var(--marigold)}
 
 .empty{padding:40px 0;color:var(--muted);font-size:15px}
 
@@ -989,8 +982,8 @@ const BOOKS = [
         (b.pick?fact('Chosen by',b.pick):'')+
       '</div>'+
       prose('About the book', b.about)+
-      prose('About the author', b.authorNote, true)+
-      prose('From the group', b.note, true)+
+      prose('About the author', b.authorNote)+
+      prose('From the group', b.note)+
       chips(b,true);
     detail.querySelector('.close').onclick=function(){ closeDetail(); };
     loadCover(b, detail.querySelector('.detail-cover'));
@@ -1010,9 +1003,9 @@ const BOOKS = [
                esc(l.name)+'</a>';
       }).join('')+'</div>';
   }
-  function prose(label, body, dim){
+  function prose(label, body){
     if(!body) return '';
-    return '<section class="prose'+(dim?' prose-dim':'')+'">'+
+    return '<section class="prose">'+
              '<h4>'+esc(label)+'</h4><p>'+esc(body)+'</p>'+
            '</section>';
   }
@@ -1053,7 +1046,6 @@ const BOOKS = [
         };
         shelf.appendChild(btn);
       });
-      for(var k=0;k<3;k++){ var g=document.createElement('div'); g.className='slot'; shelf.appendChild(g); }
     }
 
     /* list */
